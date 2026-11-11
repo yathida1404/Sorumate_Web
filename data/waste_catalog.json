@@ -1,0 +1,3173 @@
+{
+ "version": "2026-11-09 25-class Ebetsu disposal rules with conditional preparation checks + 2cm plastic rule, pull tab, spray label (2026-11-09 r2)",
+ "verified_model_classes": true,
+ "model_mapping_notice_th": "รายชื่อ 25 คลาสนี้ตรวจเทียบจากภาพหน้า Roboflow ที่ผู้ใช้ส่งมาแล้ว แต่ยังไม่ยืนยันการเชื่อมโมเดลตรวจจับจริงกับ Render; แก้วกระดาษและแก้วพลาสติกเป็น 2 คลาสของโมเดล แต่สามารถนำเสนอเป็นกลุ่มแก้วในคู่มือได้",
+ "sources": [
+  "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+  "https://www.city.ebetsu.hokkaido.jp/site/gomi/2021.html",
+  "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/72940.pdf",
+  "https://www.city.ebetsu.hokkaido.jp/faq/faq5872.html",
+  "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/65511.pdf"
+ ],
+ "category_names": {
+  "pet": {
+   "th": "ขวด PET ที่เข้าเงื่อนไขเก็บรีไซเคิล",
+   "ja": "資源物（ペットボトル）",
+   "en": "PET bottle recyclables"
+  },
+  "recyclables": {
+   "th": "ขยะรีไซเคิล (資源物)",
+   "ja": "資源物",
+   "en": "Recyclables (資源物)"
+  },
+  "burnable": {
+   "th": "ขยะเผาได้",
+   "ja": "燃やせるごみ",
+   "en": "Burnable waste"
+  },
+  "nonburnable": {
+   "th": "ขยะเผาไม่ได้",
+   "ja": "燃やせないごみ",
+   "en": "Non-burnable waste"
+  },
+  "hazardous": {
+   "th": "ขยะอันตราย",
+   "ja": "危険ごみ",
+   "en": "Hazardous waste"
+  },
+  "review": {
+   "th": "ยังไม่ระบุถัง ต้องตรวจสอบวัสดุ/สภาพ",
+   "ja": "分別は要確認",
+   "en": "Check material / condition first"
+  },
+  "oversized": {
+   "th": "ขยะชิ้นใหญ่ (นัดเก็บ มีค่าธรรมเนียม)",
+   "ja": "大型ごみ（申込制・有料）",
+   "en": "Oversized waste (booking, fee)"
+  },
+  "not_collected": {
+   "th": "เมืองไม่เก็บ (ติดต่อร้านค้า/บริษัทรับกำจัด)",
+   "ja": "市で収集しないごみ",
+   "en": "Not collected by the city"
+  }
+ },
+ "items": [
+  {
+   "id": "battery",
+   "en": "Battery",
+   "th": "ถ่านไฟฉาย / แบตเตอรี่",
+   "ja": "電池",
+   "material": "Battery",
+   "category": "hazardous",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "dry battery",
+    "rechargeable battery",
+    "ถ่าน",
+    "แบตเตอรี่",
+    "Battery",
+    "ถ่านไฟฉายหรือแบตเตอรี่",
+    "乾電池・充電池",
+    "battery"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Battery",
+   "questions": [
+    {
+     "id": "battery_state",
+     "label_th": "สภาพถ่านหรือแบตเตอรี่เป็นอย่างไร?",
+     "label_en": "Battery condition?",
+     "label_ja": "電池の状態は？",
+     "options": [
+      {
+       "id": "intact",
+       "th": "ปกติ ไม่รั่ว/ไม่บวม",
+       "en": "Intact, not leaking/swollen",
+       "ja": "破損・液漏れなし"
+      },
+      {
+       "id": "damaged",
+       "th": "บวม แตก หรือรั่ว",
+       "en": "Damaged, swollen, or leaking",
+       "ja": "破損・膨張・液漏れ"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "battery_state": "unsure"
+      },
+      "category": "hazardous",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ดูว่าถ่านบวม แตก รั่ว หรือมีกลิ่นไหม ถ้าบวมหรือรั่ว อย่าใส่ถุงรวม ให้นำไปคืนร้านหรือติดต่อเมือง",
+        "en": "Check for swelling, cracks, leaks or smell. If swollen or leaking, do not bag it; return it to a shop or contact the city.",
+        "ja": "膨らみ・割れ・液漏れ・においを確認。膨らみや液漏れがあれば袋に入れず、販売店か市に相談。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ให้แยกเป็นขยะอันตรายไว้ก่อน ปลอดภัยที่สุด",
+        "en": "If still unsure, treat it as hazardous waste. This is the safest choice.",
+        "ja": "わからない場合は、最も安全な危険ごみとして出す。"
+       },
+       {
+        "icon": "🩹",
+        "th": "ปิดขั้วโลหะด้วยเทปฉนวนกันลัดวงจร",
+        "en": "Cover the metal terminals with insulating tape.",
+        "ja": "端子を絶縁テープでふさぐ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น แล้วนำออกในวันเก็บขยะอันตราย",
+        "en": "Use a clear or translucent bag, kept apart from other waste, on the hazardous-waste day.",
+        "ja": "透明・半透明の袋に入れ、他のごみと分けて危険ごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "hazardous",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔋",
+        "th": "ปิดขั้วโลหะด้วยเทปฉนวนเพื่อกันลัดวงจร",
+        "en": "Insulate metal terminals with tape to avoid shorts.",
+        "ja": "金属端子にテープを貼って絶縁する。"
+       },
+       {
+        "icon": "⚠️",
+        "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น และทิ้งวันรับขยะอันตราย",
+        "en": "Place in a separate clear/translucent bag on a hazardous-waste collection day.",
+        "ja": "他のごみと分け、透明・半透明の袋に入れて危険ごみの収集日に出す。"
+       }
+      ],
+      "when": {
+       "battery_state": "intact"
+      }
+     },
+     {
+      "category": "not_collected",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🚫",
+        "th": "ถ่านหรือแบตเตอรี่ที่บวม แตก หรือรั่ว เมืองไม่รับเก็บ ห้ามใส่ถุงขยะทุกประเภท",
+        "en": "Swollen, cracked or leaking batteries are not collected by the city. Do not put them in any garbage bag.",
+        "ja": "破損・膨張したものは市では回収しない。どのごみ袋にも入れない。"
+       },
+       {
+        "icon": "🏪",
+        "th": "นำไปคืนร้านค้าหรือจุดรับแบตเตอรี่ หรือสอบถามเมือง (011-384-5600)",
+        "en": "Take it to a shop or battery collection point, or ask the city (011-384-5600).",
+        "ja": "販売店や回収拠点へ持ち込むか、市（011-384-5600）に相談。"
+       }
+      ],
+      "when": {
+       "battery_state": "damaged"
+      }
+     }
+    ]
+   },
+   "icon": "🔋"
+  },
+  {
+   "id": "aluminum_can",
+   "en": "Beverage Can",
+   "th": "กระป๋องเครื่องดื่ม",
+   "ja": "飲料缶",
+   "material": "Metal",
+   "category": "recyclables",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "aluminium can",
+    "drink can",
+    "กระป๋องน้ำ",
+    "Aluminum Can",
+    "กระป๋องอะลูมิเนียม",
+    "アルミ缶",
+    "aluminum can",
+    "beverage can",
+    "กระป๋องเครื่องดื่ม"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Beverage Can",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "recyclables",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "💧",
+       "th": "เทเครื่องดื่มออกและล้างกระป๋องด้วยน้ำ",
+       "en": "Empty it and rinse with water.",
+       "ja": "中身を出して水ですすぐ。"
+      },
+      {
+       "icon": "🥫",
+       "th": "ห่วงดึงที่ติดกับกระป๋องไม่ต้องดึงออก",
+       "en": "Leave the pull tab attached.",
+       "ja": "プルタブは付けたままでよい。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+       "en": "Put it in a clear or translucent bag on your area's recycling day.",
+       "ja": "透明・半透明の袋に入れ、地区の資源物の日に出す。"
+      },
+      {
+       "icon": "ℹ️",
+       "th": "ข้อยกเว้น: กระป๋องสเปรย์หรือแก๊ส (มีหัวกดฉีด) เป็นขยะอันตราย ห้ามเจาะรู · กระป๋องที่มีคราบน้ำมันล้างไม่ออก ทิ้งเป็นขยะเผาไม่ได้",
+       "en": "Exceptions: spray or gas cans (with a nozzle) are hazardous waste; never puncture them. Cans with oil residue that will not wash off are non-burnable.",
+       "ja": "例外：噴射ボタンのあるスプレー缶・ガス缶は危険ごみ（穴は開けない）。洗っても油汚れが落ちない缶は燃やせないごみ。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "🥫"
+  },
+  {
+   "id": "beverage_carton",
+   "en": "Beverage Carton",
+   "th": "กล่องเครื่องดื่ม",
+   "ja": "飲料用紙パック",
+   "material": "Paper",
+   "category": "recyclables",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "milk carton",
+    "juice carton",
+    "paper carton",
+    "กล่องนม",
+    "กล่องน้ำผลไม้",
+    "Beverage Carton",
+    "กล่องนมหรือเครื่องดื่ม",
+    "紙パック",
+    "beverage carton"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Beverage Carton",
+   "questions": [
+    {
+     "id": "carton_type",
+     "label_th": "ด้านในกล่องเป็นชนิดใด?",
+     "label_en": "Inside of the carton?",
+     "label_ja": "紙パックの内側は？",
+     "options": [
+      {
+       "id": "paper",
+       "th": "กระดาษสีขาว มีสัญลักษณ์紙パック",
+       "en": "White paper carton, paper-pack mark",
+       "ja": "白い紙パック・紙パックマーク"
+      },
+      {
+       "id": "foil",
+       "th": "เคลือบสีเงิน/ฟอยล์",
+       "en": "Silver/foil lining",
+       "ja": "銀色の内側"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "carton_type": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ตัดหรือแกะกล่องดูด้านใน ถ้าเป็นกระดาษสีขาวและมีเครื่องหมาย 紙パック จะรีไซเคิลได้ ถ้าเป็นสีเงินหรือฟอยล์ให้ทิ้งเผาได้",
+        "en": "Open it and look inside: plain white paper with the 紙パック mark is recyclable; silver/foil lining is burnable.",
+        "ja": "開いて内側を確認。白い紙で紙パックマークがあれば資源物、銀色（アルミ）なら燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "recyclables",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🧃",
+        "th": "เทให้หมด ล้างด้านใน กางกล่องแล้วผึ่งให้แห้ง",
+        "en": "Empty, rinse, open the carton and dry it.",
+        "ja": "中をすすぎ、開いて乾かす。"
+       },
+       {
+        "icon": "🔵",
+        "th": "ถอดฝาพลาสติก (ถ้ามี) ไปขยะเผาได้",
+        "en": "Remove plastic cap if present and dispose of it as burnable waste.",
+        "ja": "プラスチックのキャップは外し、燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+        "en": "Use a separate clear/translucent bag on your district’s recycling collection day.",
+        "ja": "種類別に透明・半透明の袋へ入れ、地区の資源物収集日に出す。"
+       }
+      ],
+      "when": {
+       "carton_type": "paper"
+      }
+     },
+     {
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "📦",
+        "th": "กล่องด้านในสีเงิน/ฟอยล์ไม่ใช่กระดาษแพ็กรีไซเคิลของเมือง",
+        "en": "Silver-lined cartons are not accepted in the city paper-carton recycling stream.",
+        "ja": "内側が銀色の紙パックは資源物対象外。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "carton_type": "foil"
+      }
+     }
+    ]
+   },
+   "icon": "🧃"
+  },
+  {
+   "id": "can_lid",
+   "en": "Can Lid",
+   "th": "ฝากระป๋อง",
+   "ja": "缶のふた",
+   "material": "Metal",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "pull tab",
+    "metal lid",
+    "ฝากระป๋อง",
+    "Can Lid",
+    "缶のふた",
+    "can lid"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Can Lid",
+   "questions": [
+    {
+     "id": "lid_kind",
+     "label_th": "เป็นฝาประเภทไหน?",
+     "label_en": "What kind of lid?",
+     "label_ja": "ふたの種類は？",
+     "options": [
+      {
+       "id": "tab_on_can",
+       "th": "ห่วงดึงยังติดกระป๋อง",
+       "en": "Pull tab still on the can",
+       "ja": "缶に付いたままのプルトップ"
+      },
+      {
+       "id": "pull_tab",
+       "th": "ห่วงดึงที่แกะออกมาแล้ว",
+       "en": "Detached pull tab",
+       "ja": "外したプルトップ"
+      },
+      {
+       "id": "metal",
+       "th": "ฝาโลหะที่แยกออก",
+       "en": "Detached metal lid",
+       "ja": "外した金属製のふた"
+      },
+      {
+       "id": "plastic",
+       "th": "ฝาพลาสติก",
+       "en": "Plastic cap",
+       "ja": "プラスチックのふた"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "lid_kind": "unsure"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ฝาโลหะจะแข็ง เย็น และงอยาก ฝาพลาสติกจะเบาและงอได้ ถ้าห่วงดึงยังติดกระป๋อง ทิ้งไปพร้อมกระป๋องได้เลย",
+        "en": "Metal lids are stiff and cold; plastic lids are light and bend. A tab still on the can goes with the can.",
+        "ja": "金属のふたは硬く冷たい。プラスチックは軽く曲がる。缶に付いたままのプルタブは缶と一緒に。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาไม่ได้ ปลอดภัยกว่า",
+        "en": "If still unsure, non-burnable is the safer choice.",
+        "ja": "わからない場合は、より安全な燃やせないごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "recyclables",
+      "ready": true,
+      "when": {
+       "lid_kind": "tab_on_can"
+      },
+      "steps": [
+       {
+        "icon": "🥫",
+        "th": "ทิ้งไปพร้อมกระป๋องได้เลย ไม่ต้องแกะ ล้างกระป๋องก่อน",
+        "en": "Leave it on the can and recycle with the rinsed can.",
+        "ja": "外さずに、すすいだ缶と一緒に資源物へ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+        "en": "Use a separate clear/translucent bag on your district’s recycling collection day.",
+        "ja": "透明・半透明の袋に入れ、資源物の収集日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔩",
+        "th": "ห่วงดึงที่แกะออกมาแล้วเป็นขยะเผาไม่ได้ (ไม่จำเป็นต้องแกะออกจากกระป๋อง)",
+        "en": "A detached pull tab is non-burnable. You do not need to remove tabs from cans.",
+        "ja": "プルトップ単体は燃やせないごみ（缶から外す必要はありません）。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "lid_kind": "pull_tab"
+      }
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔩",
+        "th": "ฝาโลหะที่แยกจากกระป๋อง (ไม่ใช่ห่วงดึง) ทิ้งเป็นขยะเผาไม่ได้",
+        "en": "Detached metal lids (not pull tabs) go to non-burnable waste.",
+        "ja": "外した金属製のふた（プルトップ以外）は燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "lid_kind": "metal"
+      }
+     },
+     {
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔵",
+        "th": "ฝาพลาสติกอ่อนทิ้งขยะเผาได้",
+        "en": "Plastic caps/lids of this type go to burnable waste.",
+        "ja": "プラスチック製のふたは燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "lid_kind": "plastic"
+      }
+     }
+    ]
+   },
+   "icon": "⭕"
+  },
+  {
+   "id": "cardboard_box",
+   "en": "Cardboard Box",
+   "th": "กล่องกระดาษลูกฟูก",
+   "ja": "段ボール箱",
+   "material": "Paper",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตรวจว่ากระดาษลูกฟูกพับใส่ถุงขยะเผาได้หรือจำเป็นต้องมัดเป็นชุดติดสติกเกอร์ หรือเลือกส่งรีไซเคิลกับกลุ่มชุมชน/เอกชน",
+   "details_ja": "指定袋に入るか、束にして処理券が必要か、集団古紙回収を使うかを確認する。",
+   "aliases": [
+    "cardboard",
+    "box",
+    "กล่องลัง",
+    "ลัง",
+    "Cardboard Box",
+    "กล่องกระดาษลูกฟูก",
+    "段ボール箱",
+    "cardboard box"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Check whether cardboard fits a burnable-waste bag, requires a tied bundle/ticket, or can go to community/private paper recovery.",
+   "model_class": "Cardboard Box",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "burnable",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "✂️",
+       "th": "แกะเทปและส่วนที่เป็นโลหะออก แล้วพับกล่องให้แบน",
+       "en": "Remove tape and metal parts, then flatten the box.",
+       "ja": "テープや金具を外し、平らにたたむ。"
+      },
+      {
+       "icon": "♻️",
+       "th": "ถ้ามีกลุ่มรับกระดาษเก่าของชุมชน (集団資源回収) แนะนำให้ส่งที่นั่น",
+       "en": "If your community runs a paper collection (集団資源回収), use it.",
+       "ja": "集団資源回収があればそちらへ。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "กล่องเล็กใส่ถุงขยะเผาได้ของเมือง · กล่องใหญ่มัดเชือก สูงไม่เกิน 20 ซม. ติดใบชำระ 100 เยน (ด้านยาวไม่เกิน 50 ซม.) หรือ 200 เยน (ไม่เกิน 1 ม.) แล้วนำออกวันขยะเผาได้",
+       "en": "Small boxes go in a designated burnable bag. Tie large boxes in bundles up to 20 cm high with a 100-yen ticket (longest side up to 50 cm) or 200-yen ticket (up to 1 m), on burnable day.",
+       "ja": "小さい箱は指定ごみ袋へ。大きい箱は高さ20cm以下に束ね、処理券100円（最長辺50cm以下）または200円（1m以下）を貼って燃やせるごみの日に出す。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "📦"
+  },
+  {
+   "id": "plastic_cutlery",
+   "en": "Cutlery",
+   "th": "ช้อนหรือส้อม",
+   "ja": "スプーン・フォーク",
+   "material": "Mixed",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "spoon",
+    "fork",
+    "cutlery",
+    "ช้อน",
+    "ส้อม",
+    "Plastic Cutlery",
+    "ช้อนส้อมพลาสติก",
+    "プラスチック製スプーン・フォーク",
+    "plastic cutlery",
+    "ช้อนส้อม"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Cutlery",
+   "questions": [
+    {
+     "id": "cutlery_material",
+     "label_th": "วัสดุช้อนหรือส้อมคืออะไร?",
+     "label_en": "Cutlery material?",
+     "label_ja": "材質は？",
+     "options": [
+      {
+       "id": "soft",
+       "th": "พลาสติก",
+       "en": "Plastic",
+       "ja": "プラスチック"
+      },
+      {
+       "id": "metal",
+       "th": "โลหะ",
+       "en": "Metal",
+       "ja": "金属"
+      },
+      {
+       "id": "wood",
+       "th": "ไม้",
+       "en": "Wood",
+       "ja": "木"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "cutlery_material": "unsure"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ช้อนส้อมโลหะจะหนัก เย็น และงอไม่ได้ พลาสติกหรือไม้จะเบา ถ้าเป็นพลาสติกบางหรือไม้ ให้ย้อนกลับไปเลือกใหม่ จะทิ้งเผาได้",
+        "en": "Metal cutlery is heavy, cold and rigid; plastic or wood is light. If it is thin plastic or wood, go back and choose it: it is burnable.",
+        "ja": "金属は重く冷たく曲がらない。プラスチックや木は軽い。薄いプラスチックか木なら戻って選び直すと燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาไม่ได้ ปลอดภัยกว่า",
+        "en": "If still unsure, non-burnable is the safer choice.",
+        "ja": "わからない場合は、より安全な燃やせないごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔥",
+        "th": "ช้อนส้อมพลาสติกทิ้งเป็นขยะเผาได้",
+        "en": "Plastic cutlery is burnable.",
+        "ja": "プラスチックのスプーン・フォークは燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "cutlery_material": "soft"
+      }
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔩",
+        "th": "ช้อน/ส้อมโลหะทิ้งเป็นขยะเผาไม่ได้",
+        "en": "Metal cutlery is non-burnable.",
+        "ja": "金属の食器は燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "cutlery_material": "metal"
+      }
+     },
+     {
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🌿",
+        "th": "ช้อนไม้หรือไม้ไผ่ชิ้นเล็กทิ้งเป็นขยะเผาได้",
+        "en": "Small wooden cutlery is burnable.",
+        "ja": "小さな木製の箸・スプーンは燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "cutlery_material": "wood"
+      }
+     }
+    ]
+   },
+   "icon": "🍴"
+  },
+  {
+   "id": "egg_carton",
+   "en": "Egg Carton",
+   "th": "แผงไข่",
+   "ja": "卵パック",
+   "material": "Mixed",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "egg tray",
+    "แผงไข่",
+    "Egg Carton",
+    "แผงไข่กระดาษ",
+    "紙製卵パック",
+    "egg carton"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Egg Carton",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "burnable",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "🥚",
+       "th": "แผงไข่กระดาษหรือพลาสติก ทิ้งเผาได้ทั้งคู่",
+       "en": "Paper and plastic egg cartons are both burnable.",
+       "ja": "紙・プラスチックの卵パックはどちらも燃やせるごみ。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+       "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+       "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "🥚"
+  },
+  {
+   "id": "foam_waste",
+   "en": "Food container / tray",
+   "th": "ภาชนะใส่อาหาร",
+   "ja": "食品容器・トレイ",
+   "material": "Foam / Plastic",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "foam",
+    "styrofoam",
+    "foam container",
+    "ถาดโฟม",
+    "กล่องโฟม",
+    "Foam Waste (Box / Cup)",
+    "โฟม (กล่องหรือแก้ว)",
+    "発泡スチロール（容器など）",
+    "foam waste",
+    "styrofoam food container",
+    "ถ้วยโฟม",
+    "ชามโฟม",
+    "กล่องข้าวโฟม",
+    "ภาชนะใส่อาหาร",
+    "foam bowl",
+    "foam cup",
+    "foam tray",
+    "food tray",
+    "カップ麺の容器",
+    "どんぶり容器",
+    "発泡トレイ",
+    "食品トレイ"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Foam Food Container",
+   "questions": [
+    {
+     "id": "fc_type",
+     "label_th": "ภาชนะนี้เป็นแบบไหน?",
+     "label_en": "Which kind is it?",
+     "label_ja": "どのタイプですか？",
+     "options": [
+      {
+       "id": "white_foam_tray",
+       "th": "ถาดโฟมสีขาวล้วนแบบแบน (เช่น ถาดใส่เนื้อ ปลา ผัก จากซูเปอร์)",
+       "en": "Flat plain white foam tray (e.g. meat, fish or vegetable tray)",
+       "ja": "白色の発泡スチロール製トレイ（肉・魚・野菜などの平たいトレイ）"
+      },
+      {
+       "id": "other_foam",
+       "th": "โฟมแบบอื่น: ถ้วย ชาม กล่องข้าว โฟมกันกระแทก หรือมีสีมีลาย (แม้เป็นสีขาว)",
+       "en": "Other foam: cup, bowl, lunch box, packing foam, or coloured/patterned (even if white)",
+       "ja": "その他の発泡スチロール：カップ・どんぶり・弁当容器・緩衝材、色・柄付き（白くても）"
+      },
+      {
+       "id": "plastic",
+       "th": "พลาสติกทั่วไป (ใส แข็ง หรือบาง)",
+       "en": "Ordinary plastic (clear, rigid or thin)",
+       "ja": "一般的なプラスチック（透明・硬い・薄い）"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "fc_type": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ถ้าเป็นถาดแบนสีขาวล้วน กดแล้วนุ่มแบบโฟม ย้อนกลับไปเลือก \"ถาดโฟมสีขาวล้วน\" จะรีไซเคิลได้ แบบอื่นส่วนใหญ่ทิ้งเผาได้",
+        "en": "If it is a flat, plain white foam tray, go back and choose it: it is recyclable. Most other food containers are burnable.",
+        "ja": "平たい白色の発泡トレイなら戻って選ぶと資源物。それ以外の多くは燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "fc_type": "white_foam_tray"
+      },
+      "category": "recyclables",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🍱",
+        "th": "เฉพาะถาดโฟมสีขาวล้วนแบบแบนที่สะอาด ส่วนถ้วย ชาม และกล่องข้าวโฟม แม้เป็นสีขาว ให้ทิ้งเป็นขยะเผาได้",
+        "en": "Only clean, flat, plain white foam trays. Foam cups, bowls and lunch boxes go in burnable waste, even if white.",
+        "ja": "対象は白色で清潔な平たい発泡トレイのみ。カップ・どんぶり・弁当容器は白くても燃やせるごみ。"
+       },
+       {
+        "icon": "💧",
+        "th": "ล้างถาดและแกะพลาสติกห่อออกก่อน",
+        "en": "Rinse and remove cling film first.",
+        "ja": "水ですすぎ、ラップを取り除く。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+        "en": "Use a separate clear/translucent bag on your district’s recycling collection day.",
+        "ja": "種類別に透明・半透明の袋へ入れ、地区の資源物収集日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "fc_type": "other_foam"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🍱",
+        "th": "ถ้วย ชาม กล่องข้าวโฟม หรือโฟมมีสีมีลาย ไม่นับเป็นถาดขาว แม้เป็นสีขาว ให้ทิ้งเป็นขยะเผาได้",
+        "en": "Foam cups, bowls, lunch boxes and coloured or patterned foam are not white trays, even if white. They are burnable.",
+        "ja": "発泡のカップ・どんぶり・弁当容器や色・柄付きのものは、白くても白色トレイの対象外。燃やせるごみ。"
+       },
+       {
+        "icon": "🧶",
+        "th": "โฟมชิ้นใหญ่ที่ใส่ถุงไม่ได้ ให้ซ้อนแล้วมัดเชือก ติดใบชำระค่าขยะ (ごみ処理券) ตามขนาด",
+        "en": "Large foam that does not fit a bag: stack, tie with string and attach garbage tickets by size.",
+        "ja": "袋に入らない大きなものは重ねてひもで束ね、大きさに応じたごみ処理券を貼る。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "fc_type": "plastic"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "♻️",
+        "th": "ถาดหรือกล่องพลาสติกทั่วไปทิ้งเป็นขยะเผาได้ ถาดพลาสติกที่ไม่ใช่โฟมไม่เข้าเกณฑ์ถาดขาวรีไซเคิล",
+        "en": "Ordinary plastic trays and boxes are burnable. Non-foam trays are not part of white-tray recycling.",
+        "ja": "一般的なプラスチック容器は燃やせるごみ。発泡スチロール製でないトレイは白色トレイの対象外。"
+       },
+       {
+        "icon": "💧",
+        "th": "เทเศษอาหารออกและล้างคร่าว ๆ ก่อนทิ้ง",
+        "en": "Empty food scraps and give it a quick rinse.",
+        "ja": "中身を出し、軽くすすぐ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ]
+     }
+    ]
+   },
+   "icon": "🍱",
+   "group": "food_container"
+  },
+  {
+   "id": "food_can",
+   "en": "Food Can",
+   "th": "กระป๋องอาหาร",
+   "ja": "食品缶",
+   "material": "Metal",
+   "category": "recyclables",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "tin can",
+    "canned food",
+    "กระป๋องอาหาร",
+    "Food Can",
+    "食品缶",
+    "food can"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Food Can",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "recyclables",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "💧",
+       "th": "เทอาหารออกและล้างกระป๋องด้วยน้ำ",
+       "en": "Empty it and rinse with water.",
+       "ja": "中身を出して水ですすぐ。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+       "en": "Put it in a clear or translucent bag on your area's recycling day.",
+       "ja": "透明・半透明の袋に入れ、地区の資源物の日に出す。"
+      },
+      {
+       "icon": "ℹ️",
+       "th": "ข้อยกเว้น: กระป๋องที่มีคราบน้ำมันหรืออาหารล้างไม่ออก ทิ้งเป็นขยะเผาไม่ได้",
+       "en": "Exception: cans with oil or food residue that will not wash off are non-burnable.",
+       "ja": "例外：洗っても油や食べ残しが落ちない缶は燃やせないごみ。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "🥫"
+  },
+  {
+   "id": "glass_bottle",
+   "en": "Glass Beverage Bottle",
+   "th": "ขวดแก้วเครื่องดื่ม",
+   "ja": "飲料用ガラスびん",
+   "material": "Glass",
+   "category": "recyclables",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "glass jar",
+    "ขวดแก้วแตก",
+    "bottle glass",
+    "Glass Bottle",
+    "ขวดแก้ว",
+    "ガラスびん",
+    "glass bottle",
+    "ขวดแก้วเครื่องดื่ม"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "questions": [
+    {
+     "id": "glass_state",
+     "label_th": "ขวดแก้วแตกหรือไม่?",
+     "label_en": "Is the glass bottle broken?",
+     "label_ja": "びんは割れていますか？",
+     "options": [
+      {
+       "id": "intact",
+       "th": "ไม่แตก",
+       "en": "Unbroken",
+       "ja": "割れていない"
+      },
+      {
+       "id": "broken",
+       "th": "แตกหรือร้าว",
+       "en": "Broken or cracked",
+       "ja": "割れている"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Glass Beverage Bottle",
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "glass_state": "unsure"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ส่องดูรอยร้าวหรือบิ่น ถ้าไม่แน่ใจ ให้ถือว่าแตก",
+        "en": "Check for cracks or chips. If unsure, treat it as broken.",
+        "ja": "ひび・欠けを確認。わからなければ割れているものとして扱う。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาไม่ได้ ปลอดภัยกว่า",
+        "en": "If still unsure, non-burnable is the safer choice.",
+        "ja": "わからない場合は、より安全な燃やせないごみへ。"
+       },
+       {
+        "icon": "📰",
+        "th": "ห่อด้วยกระดาษหนา ๆ และเขียนว่า 「キケン」 (อันตราย) บนถุง",
+        "en": "Wrap it in thick paper and write 「キケン」 (danger) on the bag.",
+        "ja": "厚い紙で包み、袋に「キケン」と書く。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🧤",
+        "th": "ขวดแก้วแตกหรือมีรอยร้าว ห่อด้วยกระดาษเพื่อป้องกันบาด",
+        "en": "Wrap broken or cracked glass in paper to prevent injury.",
+        "ja": "割れたびんは紙などで包み、けがを防ぐ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "glass_state": "broken"
+      }
+     },
+     {
+      "category": "recyclables",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "💧",
+        "th": "เทให้หมดและล้างขวด",
+        "en": "Empty and rinse the bottle.",
+        "ja": "中身を出してすすぐ。"
+       },
+       {
+        "icon": "🔩",
+        "th": "ถอดฝา: ฝาพลาสติกทิ้งเผาได้ · ฝาโลหะทิ้งเผาไม่ได้",
+        "en": "Remove the cap: plastic caps are burnable, metal caps non-burnable.",
+        "ja": "キャップを外す：プラは燃やせるごみ、金属は燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+        "en": "Put it in a clear or translucent bag on your area's recycling day.",
+        "ja": "透明・半透明の袋に入れ、地区の資源物の日に出す。"
+       },
+       {
+        "icon": "ℹ️",
+        "th": "ข้อยกเว้น: ขวดน้ำมัน ขวดยาทาเล็บ หรือขวดที่มีคราบล้างไม่ออก ทิ้งเป็นขยะเผาไม่ได้",
+        "en": "Exceptions: oil or nail-polish bottles, and bottles with residue that will not wash off, are non-burnable.",
+        "ja": "例外：油・マニキュアのびん、洗っても汚れが落ちないびんは燃やせないごみ。"
+       }
+      ],
+      "when": {
+       "glass_state": "intact"
+      }
+     }
+    ]
+   },
+   "icon": "🍾"
+  },
+  {
+   "id": "kraft_paper_envelope",
+   "en": "Kraft Paper Envelope",
+   "th": "ซองเอกสารกระดาษคราฟต์",
+   "ja": "クラフト封筒",
+   "material": "Paper",
+   "category": "burnable",
+   "status": "conditional",
+   "details_th": "แยกพลาสติกที่หน้าต่างซอง คลิป หรือส่วนโลหะออกตามชนิดวัสดุ | ตัวซองเอกสารกระดาษคราฟต์ A4 เป็นกระดาษเผาได้ หากมีระบบรับกระดาษเก่าของชุมชนใช้ได้ตามกฎจุดรับ | ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+   "details_ja": "透明窓・金属クリップ等は材質に応じて取り外す。 | A4クラフト封筒は紙類の燃やせるごみ。古紙回収も確認。 | 市指定の燃やせるごみ袋に入れ、収集日に出す。",
+   "aliases": [
+    "kraft envelope",
+    "document envelope",
+    "ซองสีน้ำตาล",
+    "ซองเอกสาร",
+    "Kraft Paper Envelope (A4)",
+    "ซองเอกสารคราฟต์ A4",
+    "クラフト封筒（A4）",
+    "kraft paper envelope",
+    "kraft paper envelope a4",
+    "ซองเอกสาร a4",
+    "ซองคราฟต์"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Separate plastic windows and metal clips by material. | The A4 kraft paper envelope is burnable paper; community paper recovery may be available. | Use a city-designated burnable-waste bag and the burnable collection day.",
+   "model_class": "Kraft Paper Envelope",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "burnable",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "✂️",
+       "th": "แยกพลาสติกที่หน้าต่างซอง คลิป หรือส่วนโลหะออกตามชนิดวัสดุ",
+       "en": "Separate plastic windows and metal clips by material.",
+       "ja": "透明窓・金属クリップ等は材質に応じて取り外す。"
+      },
+      {
+       "icon": "✉️",
+       "th": "ตัวซองเอกสารกระดาษคราฟต์ A4 เป็นกระดาษเผาได้ หากมีระบบรับกระดาษเก่าของชุมชนใช้ได้ตามกฎจุดรับ",
+       "en": "The A4 kraft paper envelope is burnable paper; community paper recovery may be available.",
+       "ja": "A4クラフト封筒は紙類の燃やせるごみ。古紙回収も確認。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+       "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+       "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "✉️"
+  },
+  {
+   "id": "light_bulb",
+   "en": "Light Bulb",
+   "th": "หลอดไฟ",
+   "ja": "電球",
+   "material": "Mixed",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "lamp",
+    "led bulb",
+    "fluorescent",
+    "หลอดไฟ LED",
+    "หลอดฟลูออเรสเซนต์",
+    "Light Bulb",
+    "หลอดไฟ",
+    "電球・蛍光管",
+    "light bulb",
+    "หลอด hid",
+    "หลอดนีออน",
+    "HIDランプ",
+    "グロー球",
+    "蛍光灯"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "questions": [
+    {
+     "id": "bulb_type",
+     "label_th": "หลอดไฟชนิดใด?",
+     "label_en": "Bulb type?",
+     "label_ja": "電球の種類は？",
+     "options": [
+      {
+       "id": "led",
+       "th": "LED หรือหลอดไส้",
+       "en": "LED/incandescent",
+       "ja": "LED・白熱球"
+      },
+      {
+       "id": "fluorescent",
+       "th": "ฟลูออเรสเซนต์",
+       "en": "Fluorescent",
+       "ja": "蛍光管"
+      },
+      {
+       "id": "hid",
+       "th": "หลอด HID",
+       "en": "HID lamp",
+       "ja": "HIDランプ"
+      },
+      {
+       "id": "glow",
+       "th": "หลอดสตาร์ทเตอร์ (グロー球)",
+       "en": "Glow starter (グロー球)",
+       "ja": "グロー球"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Light Bulb",
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "bulb_type": "unsure"
+      },
+      "category": "hazardous",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "หลอดยาวหรือหลอดเกลียวมักเป็นฟลูออเรสเซนต์ หลอดไฟหน้ารถแบบ HID ก็เป็นขยะอันตราย ส่วนหลอด LED หลอดไส้ และหลอดสตาร์ทเตอร์ทิ้งเผาไม่ได้ ดูชนิดบนตัวหลอดหรือกล่อง",
+        "en": "Long tubes and spiral bulbs are usually fluorescent; HID lamps are also hazardous. LED, incandescent bulbs and glow starters are non-burnable. Check the type printed on the bulb or box.",
+        "ja": "細長い管や渦巻き形は蛍光管が多く、HIDランプも危険ごみ。LED・白熱電球・グロー球は燃やせないごみ。電球や箱の表示を確認。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ให้แยกเป็นขยะอันตรายไว้ก่อน ปลอดภัยที่สุด",
+        "en": "If still unsure, treat it as hazardous waste. This is the safest choice.",
+        "ja": "わからない場合は、最も安全な危険ごみとして出す。"
+       },
+       {
+        "icon": "📦",
+        "th": "ใส่กล่องเดิมหรือห่อกันแตก",
+        "en": "Put it in its original box or wrap it so it does not break.",
+        "ja": "購入時の箱に入れるなど、割れないようにする。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น แล้วนำออกในวันเก็บขยะอันตราย",
+        "en": "Use a clear or translucent bag, kept apart from other waste, on the hazardous-waste day.",
+        "ja": "透明・半透明の袋に入れ、他のごみと分けて危険ごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "💡",
+        "th": "หลอด LED หรือหลอดไส้ทิ้งขยะเผาไม่ได้ ห่อป้องกันแตกหากจำเป็น",
+        "en": "LED and incandescent bulbs are non-burnable; wrap to prevent breakage.",
+        "ja": "LED・白熱電球は燃やせないごみ。割れないよう包む。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "bulb_type": "led"
+      }
+     },
+     {
+      "category": "hazardous",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "⚠️",
+        "th": "หลอดฟลูออเรสเซนต์/หลอดเรืองแสง ห่อด้วยกล่องเดิมหรือวัสดุป้องกันแตก",
+        "en": "Fluorescent tubes are hazardous; protect from breakage with original box or padding.",
+        "ja": "蛍光管は危険ごみ。購入時の箱等で割れないよう保護する。"
+       },
+       {
+        "icon": "⚠️",
+        "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น และทิ้งวันรับขยะอันตราย",
+        "en": "Place in a separate clear/translucent bag on a hazardous-waste collection day.",
+        "ja": "他のごみと分け、透明・半透明の袋に入れて危険ごみの収集日に出す。"
+       }
+      ],
+      "when": {
+       "bulb_type": "fluorescent"
+      }
+     },
+     {
+      "when": {
+       "bulb_type": "hid"
+      },
+      "category": "hazardous",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "⚠️",
+        "th": "หลอด HID เป็นขยะอันตราย ใส่กล่องเดิมหรือกล่องป้องกันไม่ให้แตก",
+        "en": "HID lamps are hazardous waste. Put them in the original box or a protective case so they do not break.",
+        "ja": "HIDランプは危険ごみ。割れないよう購入時の紙箱や保護ケースに入れる。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น แล้วนำออกในวันเก็บขยะอันตราย",
+        "en": "Use a clear or translucent bag, kept apart from other waste, on the hazardous-waste day.",
+        "ja": "透明・半透明の袋に入れ、他のごみと分けて危険ごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "bulb_type": "glow"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "💡",
+        "th": "หลอดสตาร์ทเตอร์ (グロー球) ไม่ใช่ขยะอันตราย ทิ้งเป็นขยะเผาไม่ได้ ห่อกันแตกก่อน",
+        "en": "Glow starters are not hazardous waste: they are non-burnable. Wrap them so they do not break.",
+        "ja": "グロー球は危険ごみではなく燃やせないごみ。割れないよう包む。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     }
+    ]
+   },
+   "icon": "💡"
+  },
+  {
+   "id": "lighter",
+   "en": "Lighter",
+   "th": "ไฟแช็ก",
+   "ja": "ライター",
+   "material": "Hazardous",
+   "category": "hazardous",
+   "status": "validated",
+   "details_th": "ใช้แก๊สหรือเชื้อเพลิงให้หมดเท่าที่ทำได้ หลีกเลี่ยงความร้อนและประกายไฟ | ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น และทิ้งวันรับขยะอันตราย",
+   "details_ja": "できるだけ使い切り、火気を避ける。 | 他のごみと分け、透明・半透明の袋に入れて危険ごみの収集日に出す。",
+   "aliases": [
+    "ไฟแช็ก",
+    "gas lighter",
+    "Lighter",
+    "ライター",
+    "lighter"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Use up fuel as far as safely possible; avoid heat and sparks. | Place in a separate clear/translucent bag on a hazardous-waste collection day.",
+   "model_class": "Lighter",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "hazardous",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "🔥",
+       "th": "ใช้แก๊สหรือเชื้อเพลิงให้หมดเท่าที่ทำได้ หลีกเลี่ยงความร้อนและประกายไฟ",
+       "en": "Use up fuel as far as safely possible; avoid heat and sparks.",
+       "ja": "できるだけ使い切り、火気を避ける。"
+      },
+      {
+       "icon": "⚠️",
+       "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น และทิ้งวันรับขยะอันตราย",
+       "en": "Place in a separate clear/translucent bag on a hazardous-waste collection day.",
+       "ja": "他のごみと分け、透明・半透明の袋に入れて危険ごみの収集日に出す。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "🔥"
+  },
+  {
+   "id": "paper_cup",
+   "en": "Cup",
+   "th": "แก้วน้ำ",
+   "ja": "コップ",
+   "material": "Mixed",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "Paper Cup",
+    "แก้วกระดาษ",
+    "紙コップ",
+    "แก้วน้ำ",
+    "แก้ว",
+    "cup",
+    "drink cup"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "questions": [
+    {
+     "id": "material",
+     "label_th": "แก้วนี้ทำจากอะไร?",
+     "label_en": "What is the cup made of?",
+     "label_ja": "コップの素材は？",
+     "options": [
+      {
+       "id": "disposable",
+       "th": "กระดาษหรือพลาสติก (แก้วใช้แล้วทิ้ง)",
+       "en": "Paper or plastic (disposable)",
+       "ja": "紙・プラスチック（使い捨て）"
+      },
+      {
+       "id": "glass",
+       "th": "แก้วหรือเซรามิก (แก้วน้ำในบ้าน)",
+       "en": "Glass or ceramic",
+       "ja": "ガラス・陶磁器"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Paper Cup",
+   "group": "cup",
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "material": "disposable"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🥤",
+        "th": "แยกหลอดและฝาออก เทน้ำให้หมด แก้วกระดาษและแก้วพลาสติกทิ้งเผาได้ทั้งคู่",
+        "en": "Remove the straw and lid and empty it. Paper and plastic cups are both burnable.",
+        "ja": "ストローとふたを外して中身を空に。紙・プラのコップはどちらも燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "material": "glass"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🍶",
+        "th": "แก้วน้ำที่เป็นแก้วหรือเซรามิกทิ้งเป็นขยะเผาไม่ได้ ถ้าแตกให้ห่อกระดาษและเขียน 「キケン」 บนถุง",
+        "en": "Glass or ceramic cups are non-burnable. If broken, wrap them in paper and write 「キケン」 on the bag.",
+        "ja": "ガラス・陶磁器のコップは燃やせないごみ。割れていれば紙で包み「キケン」と書く。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "material": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "แก้วใช้แล้วทิ้ง (กระดาษหรือพลาสติกบาง) เบาและบีบได้ ถ้าหนัก แข็ง เคาะมีเสียง คือแก้วหรือเซรามิก ให้ย้อนกลับไปเลือกใหม่",
+        "en": "Disposable cups are light and squeezable. If it is heavy and hard, it is glass or ceramic: go back and choose that.",
+        "ja": "使い捨ては軽く押すとへこむ。重く硬ければガラス・陶磁器なので選び直す。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     }
+    ]
+   },
+   "icon": "🥤"
+  },
+  {
+   "id": "a4_paper",
+   "en": "Paper Sheet",
+   "th": "แผ่นกระดาษ",
+   "ja": "紙（シート）",
+   "material": "Paper",
+   "category": "burnable",
+   "status": "conditional",
+   "details_th": "กระดาษแผ่นทั่วไป หากเป็นกระดาษสะอาดและมีการรับกระดาษของชุมชน แนะนำแยกส่งรีไซเคิล | หากทิ้งเป็นขยะเมืองให้ใช้หมวดเผาได้ | ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+   "details_ja": "清潔な紙は地域の古紙回収を優先する。 | 市のごみに出す場合は燃やせるごみ。 | 市指定の燃やせるごみ袋に入れ、収集日に出す。",
+   "aliases": [
+    "paper sheet",
+    "white paper",
+    "กระดาษ",
+    "A4 Paper",
+    "กระดาษ A4",
+    "A4用紙",
+    "a4 paper",
+    "กระดาษแผ่น"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "For clean sheets, prefer community paper recovery when available. | If using municipal waste collection, paper goes to burnable waste. | Use a city-designated burnable-waste bag and the burnable collection day.",
+   "model_class": "Paper Sheet",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "burnable",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "📄",
+       "th": "กระดาษแผ่นทั่วไป หากเป็นกระดาษสะอาดและมีการรับกระดาษของชุมชน แนะนำแยกส่งรีไซเคิล",
+       "en": "For clean sheets, prefer community paper recovery when available.",
+       "ja": "清潔な紙は地域の古紙回収を優先する。"
+      },
+      {
+       "icon": "🔥",
+       "th": "หากทิ้งเป็นขยะเมืองให้ใช้หมวดเผาได้",
+       "en": "If using municipal waste collection, paper goes to burnable waste.",
+       "ja": "市のごみに出す場合は燃やせるごみ。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+       "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+       "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "📄"
+  },
+  {
+   "id": "pet_plastic_bottle",
+   "en": "PET Bottle",
+   "th": "ขวด PET",
+   "ja": "ペットボトル",
+   "material": "Plastic",
+   "category": "pet",
+   "status": "conditional",
+   "details_th": "เทของข้างในให้หมด แล้วล้างน้ำ ถอดฝาและลอกฉลากออก ฝากับฉลากทิ้งเป็นขยะเผาได้ อย่าบีบขวด ใส่ถุงใสแยกเฉพาะขวด PET แล้วทิ้งวันรีไซเคิลหรือวัน PET ข้อยกเว้น: ขวดที่ใส่น้ำมัน ซอสรสจัด แชมพู น้ำยา หรือยา ทิ้งเป็นขยะเผาได้ แม้มีสัญลักษณ์ PET",
+   "details_ja": "中を空にして水ですすぐ。 キャップとラベルを外し、燃やせるごみへ。 つぶさずに透明な袋に分け、資源物またはペットボトルの日に出す。 例外：油・ソース類・シャンプー・洗剤・医薬品の容器はPET表示があっても燃やせるごみ。",
+   "aliases": [
+    "pet bottle",
+    "pet plastic bottle",
+    "ขวดน้ำ PET",
+    "PET Plastic Bottle",
+    "ขวดพลาสติก PET",
+    "ペットボトル",
+    "ขวดน้ำพลาสติก PET"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Empty it and rinse with water. Remove the cap and label; both go in burnable waste. Do not crush. Put PET bottles in a separate clear bag on recycling or PET day. Exception: bottles that held oil, strong sauces, shampoo, detergent or medicine are burnable, even with a PET mark.",
+   "model_class": "PET Bottle",
+   "questions": [],
+   "disposal": {
+    "cases": [],
+    "default": {
+     "category": "pet",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "💧",
+       "th": "เทของข้างในให้หมด แล้วล้างน้ำ",
+       "en": "Empty it and rinse with water.",
+       "ja": "中を空にして水ですすぐ。"
+      },
+      {
+       "icon": "🔵",
+       "th": "ถอดฝาและลอกฉลากออก ฝากับฉลากทิ้งเป็นขยะเผาได้",
+       "en": "Remove the cap and label; both go in burnable waste.",
+       "ja": "キャップとラベルを外し、燃やせるごみへ。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "อย่าบีบขวด ใส่ถุงใสแยกเฉพาะขวด PET แล้วทิ้งวันรีไซเคิลหรือวัน PET",
+       "en": "Do not crush. Put PET bottles in a separate clear bag on recycling or PET day.",
+       "ja": "つぶさずに透明な袋に分け、資源物またはペットボトルの日に出す。"
+      },
+      {
+       "icon": "ℹ️",
+       "th": "ข้อยกเว้น: ขวดที่ใส่น้ำมัน ซอสรสจัด แชมพู น้ำยา หรือยา ทิ้งเป็นขยะเผาได้ แม้มีสัญลักษณ์ PET",
+       "en": "Exception: bottles that held oil, strong sauces, shampoo, detergent or medicine are burnable, even with a PET mark.",
+       "ja": "例外：油・ソース類・シャンプー・洗剤・医薬品の容器はPET表示があっても燃やせるごみ。"
+      }
+     ]
+    }
+   },
+   "icon": "🧴"
+  },
+  {
+   "id": "pet_bottle_cap",
+   "en": "PET Bottle Cap",
+   "th": "ฝาขวด PET",
+   "ja": "ペットボトルのキャップ",
+   "material": "Plastic",
+   "category": "burnable",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "bottle cap",
+    "plastic cap",
+    "ฝาขวด",
+    "PET Bottle Cap",
+    "ฝาขวด PET",
+    "ペットボトルのふた",
+    "pet bottle cap"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "PET Bottle Cap",
+   "questions": [
+    {
+     "id": "cap_material",
+     "label_th": "ฝาขวดทำจากอะไร?",
+     "label_en": "Cap material?",
+     "label_ja": "キャップの材質は？",
+     "options": [
+      {
+       "id": "plastic",
+       "th": "พลาสติก",
+       "en": "Plastic",
+       "ja": "プラスチック"
+      },
+      {
+       "id": "metal",
+       "th": "โลหะ",
+       "en": "Metal",
+       "ja": "金属"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "cap_material": "unsure"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ฝาพลาสติกจะเบาและบีบงอได้ ฝาโลหะจะแข็งและเย็น ถ้าเป็นพลาสติก ย้อนกลับไปเลือกใหม่ จะทิ้งเผาได้",
+        "en": "Plastic caps are light and squeezable; metal caps are hard and cold. If plastic, go back and choose it: it is burnable.",
+        "ja": "プラスチックのキャップは軽く押すと曲がる。金属は硬く冷たい。プラスチックなら戻って選ぶと燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาไม่ได้ ปลอดภัยกว่า",
+        "en": "If still unsure, non-burnable is the safer choice.",
+        "ja": "わからない場合は、より安全な燃やせないごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔵",
+        "th": "ถอดฝาพลาสติกออกจากขวด PET และทิ้งในขยะเผาได้ ไม่ใส่ในถุง PET",
+        "en": "Separate the plastic cap from the PET bottle; put in burnable waste, not the PET bag.",
+        "ja": "プラスチックのキャップはPETボトルから外し、燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "cap_material": "plastic"
+      }
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔩",
+        "th": "ถ้าเป็นฝาโลหะ ให้แยกเป็นขยะเผาไม่ได้",
+        "en": "Metal caps go to non-burnable waste.",
+        "ja": "金属製のふたは燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "cap_material": "metal"
+      }
+     }
+    ]
+   },
+   "icon": "🔵"
+  },
+  {
+   "id": "plastic_cup",
+   "en": "Cup",
+   "th": "แก้วน้ำ",
+   "ja": "コップ",
+   "material": "Mixed",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "Plastic Cup",
+    "แก้วพลาสติก",
+    "プラスチックカップ",
+    "แก้วน้ำ",
+    "แก้ว",
+    "cup",
+    "drink cup"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "questions": [
+    {
+     "id": "material",
+     "label_th": "แก้วนี้ทำจากอะไร?",
+     "label_en": "What is the cup made of?",
+     "label_ja": "コップの素材は？",
+     "options": [
+      {
+       "id": "disposable",
+       "th": "กระดาษหรือพลาสติก (แก้วใช้แล้วทิ้ง)",
+       "en": "Paper or plastic (disposable)",
+       "ja": "紙・プラスチック（使い捨て）"
+      },
+      {
+       "id": "glass",
+       "th": "แก้วหรือเซรามิก (แก้วน้ำในบ้าน)",
+       "en": "Glass or ceramic",
+       "ja": "ガラス・陶磁器"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Plastic Cup",
+   "group": "cup",
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "material": "disposable"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🥤",
+        "th": "แยกหลอดและฝาออก เทน้ำให้หมด แก้วกระดาษและแก้วพลาสติกทิ้งเผาได้ทั้งคู่",
+        "en": "Remove the straw and lid and empty it. Paper and plastic cups are both burnable.",
+        "ja": "ストローとふたを外して中身を空に。紙・プラのコップはどちらも燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "material": "glass"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🍶",
+        "th": "แก้วน้ำที่เป็นแก้วหรือเซรามิกทิ้งเป็นขยะเผาไม่ได้ ถ้าแตกให้ห่อกระดาษและเขียน 「キケン」 บนถุง",
+        "en": "Glass or ceramic cups are non-burnable. If broken, wrap them in paper and write 「キケン」 on the bag.",
+        "ja": "ガラス・陶磁器のコップは燃やせないごみ。割れていれば紙で包み「キケン」と書く。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "material": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "แก้วใช้แล้วทิ้ง (กระดาษหรือพลาสติกบาง) เบาและบีบได้ ถ้าหนัก แข็ง เคาะมีเสียง คือแก้วหรือเซรามิก ให้ย้อนกลับไปเลือกใหม่",
+        "en": "Disposable cups are light and squeezable. If it is heavy and hard, it is glass or ceramic: go back and choose that.",
+        "ja": "使い捨ては軽く押すとへこむ。重く硬ければガラス・陶磁器なので選び直す。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     }
+    ]
+   },
+   "icon": "🥤"
+  },
+  {
+   "id": "plastic_food_container",
+   "en": "Food container / tray",
+   "th": "ภาชนะใส่อาหาร",
+   "ja": "食品容器・トレイ",
+   "material": "Foam / Plastic",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "food container",
+    "plastic tray",
+    "กล่องข้าว",
+    "ถาดพลาสติก",
+    "Plastic Food Container",
+    "กล่องอาหารพลาสติก",
+    "プラスチック食品容器",
+    "plastic food container",
+    "ถ้วยโฟม",
+    "ชามโฟม",
+    "กล่องข้าวโฟม",
+    "กล่องโฟม",
+    "ถาดโฟม",
+    "ภาชนะใส่อาหาร",
+    "foam bowl",
+    "foam cup",
+    "foam tray",
+    "food tray",
+    "カップ麺の容器",
+    "どんぶり容器",
+    "発泡トレイ",
+    "食品トレイ"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Plastic Food Container",
+   "questions": [
+    {
+     "id": "fc_type",
+     "label_th": "ภาชนะนี้เป็นแบบไหน?",
+     "label_en": "Which kind is it?",
+     "label_ja": "どのタイプですか？",
+     "options": [
+      {
+       "id": "white_foam_tray",
+       "th": "ถาดโฟมสีขาวล้วนแบบแบน (เช่น ถาดใส่เนื้อ ปลา ผัก จากซูเปอร์)",
+       "en": "Flat plain white foam tray (e.g. meat, fish or vegetable tray)",
+       "ja": "白色の発泡スチロール製トレイ（肉・魚・野菜などの平たいトレイ）"
+      },
+      {
+       "id": "other_foam",
+       "th": "โฟมแบบอื่น: ถ้วย ชาม กล่องข้าว โฟมกันกระแทก หรือมีสีมีลาย (แม้เป็นสีขาว)",
+       "en": "Other foam: cup, bowl, lunch box, packing foam, or coloured/patterned (even if white)",
+       "ja": "その他の発泡スチロール：カップ・どんぶり・弁当容器・緩衝材、色・柄付き（白くても）"
+      },
+      {
+       "id": "plastic",
+       "th": "พลาสติกทั่วไป (ใส แข็ง หรือบาง)",
+       "en": "Ordinary plastic (clear, rigid or thin)",
+       "ja": "一般的なプラスチック（透明・硬い・薄い）"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "fc_type": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ถ้าเป็นถาดแบนสีขาวล้วน กดแล้วนุ่มแบบโฟม ย้อนกลับไปเลือก \"ถาดโฟมสีขาวล้วน\" จะรีไซเคิลได้ แบบอื่นส่วนใหญ่ทิ้งเผาได้",
+        "en": "If it is a flat, plain white foam tray, go back and choose it: it is recyclable. Most other food containers are burnable.",
+        "ja": "平たい白色の発泡トレイなら戻って選ぶと資源物。それ以外の多くは燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "fc_type": "white_foam_tray"
+      },
+      "category": "recyclables",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🍱",
+        "th": "เฉพาะถาดโฟมสีขาวล้วนแบบแบนที่สะอาด ส่วนถ้วย ชาม และกล่องข้าวโฟม แม้เป็นสีขาว ให้ทิ้งเป็นขยะเผาได้",
+        "en": "Only clean, flat, plain white foam trays. Foam cups, bowls and lunch boxes go in burnable waste, even if white.",
+        "ja": "対象は白色で清潔な平たい発泡トレイのみ。カップ・どんぶり・弁当容器は白くても燃やせるごみ。"
+       },
+       {
+        "icon": "💧",
+        "th": "ล้างถาดและแกะพลาสติกห่อออกก่อน",
+        "en": "Rinse and remove cling film first.",
+        "ja": "水ですすぎ、ラップを取り除く。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+        "en": "Use a separate clear/translucent bag on your district’s recycling collection day.",
+        "ja": "種類別に透明・半透明の袋へ入れ、地区の資源物収集日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "fc_type": "other_foam"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🍱",
+        "th": "ถ้วย ชาม กล่องข้าวโฟม หรือโฟมมีสีมีลาย ไม่นับเป็นถาดขาว แม้เป็นสีขาว ให้ทิ้งเป็นขยะเผาได้",
+        "en": "Foam cups, bowls, lunch boxes and coloured or patterned foam are not white trays, even if white. They are burnable.",
+        "ja": "発泡のカップ・どんぶり・弁当容器や色・柄付きのものは、白くても白色トレイの対象外。燃やせるごみ。"
+       },
+       {
+        "icon": "🧶",
+        "th": "โฟมชิ้นใหญ่ที่ใส่ถุงไม่ได้ ให้ซ้อนแล้วมัดเชือก ติดใบชำระค่าขยะ (ごみ処理券) ตามขนาด",
+        "en": "Large foam that does not fit a bag: stack, tie with string and attach garbage tickets by size.",
+        "ja": "袋に入らない大きなものは重ねてひもで束ね、大きさに応じたごみ処理券を貼る。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "fc_type": "plastic"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "♻️",
+        "th": "ถาดหรือกล่องพลาสติกทั่วไปทิ้งเป็นขยะเผาได้ ถาดพลาสติกที่ไม่ใช่โฟมไม่เข้าเกณฑ์ถาดขาวรีไซเคิล",
+        "en": "Ordinary plastic trays and boxes are burnable. Non-foam trays are not part of white-tray recycling.",
+        "ja": "一般的なプラスチック容器は燃やせるごみ。発泡スチロール製でないトレイは白色トレイの対象外。"
+       },
+       {
+        "icon": "💧",
+        "th": "เทเศษอาหารออกและล้างคร่าว ๆ ก่อนทิ้ง",
+        "en": "Empty food scraps and give it a quick rinse.",
+        "ja": "中身を出し、軽くすすぐ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ]
+     }
+    ]
+   },
+   "icon": "🍱",
+   "group": "food_container"
+  },
+  {
+   "id": "pump_bottle",
+   "en": "Pump Bottle",
+   "th": "ขวดหัวปั๊ม",
+   "ja": "ポンプ式ボトル",
+   "material": "Plastic",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "pump bottle",
+    "soap dispenser",
+    "ขวดสบู่",
+    "ขวดแชมพู",
+    "Pump Bottle",
+    "ขวดปั๊ม",
+    "ポンプ式ボトル",
+    "ขวดสเปรย์",
+    "ขวดฟ็อกกี้",
+    "ฟ็อกกี้",
+    "กระบอกฉีดน้ำ",
+    "spray bottle",
+    "trigger spray bottle",
+    "スプレーボトル",
+    "霧吹き"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Pump Bottle",
+   "questions": [
+    {
+     "id": "pump_body",
+     "label_th": "ตัวขวดทำจากอะไร?",
+     "label_en": "What is the bottle made of?",
+     "label_ja": "容器の素材は？",
+     "options": [
+      {
+       "id": "plastic",
+       "th": "พลาสติก (เช่น ขวดแชมพู สบู่เหลว ขวดสเปรย์ฉีดน้ำ)",
+       "en": "Plastic (shampoo, soap, spray bottle)",
+       "ja": "プラスチック（シャンプー・ハンドソープ・霧吹きなど）"
+      },
+      {
+       "id": "glass",
+       "th": "แก้ว",
+       "en": "Glass",
+       "ja": "ガラス"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "pump_body": "plastic"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "💧",
+        "th": "ใช้ของข้างในให้หมดแล้วล้างคร่าว ๆ",
+        "en": "Use up the contents and give it a quick rinse.",
+        "ja": "中身を使い切り、軽くすすぐ。"
+       },
+       {
+        "icon": "🔩",
+        "th": "ถอดหัวปั๊มหรือหัวฉีดออก หัวที่มีสปริงโลหะข้างในทิ้งเป็นขยะเผาไม่ได้",
+        "en": "Remove the pump or trigger head. Heads with a metal spring inside are non-burnable.",
+        "ja": "ポンプ・噴射部分を外す。金属ばね入りの部分は燃やせないごみ。"
+       },
+       {
+        "icon": "🧴",
+        "th": "ตัวขวดพลาสติกทิ้งเป็นขยะเผาได้",
+        "en": "The plastic bottle is burnable.",
+        "ja": "プラスチックの容器は燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "pump_body": "glass"
+      },
+      "category": "recyclables",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "💧",
+        "th": "ใช้ของข้างในให้หมดแล้วล้างขวด",
+        "en": "Use up the contents and rinse the bottle.",
+        "ja": "中身を使い切り、びんをすすぐ。"
+       },
+       {
+        "icon": "🔩",
+        "th": "ถอดหัวปั๊มหรือหัวฉีดออก หัวที่มีสปริงโลหะข้างในทิ้งเป็นขยะเผาไม่ได้",
+        "en": "Remove the pump or trigger head. Heads with a metal spring inside are non-burnable.",
+        "ja": "ポンプ・噴射部分を外す。金属ばね入りの部分は燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "แยกใส่ถุงใสหรือกึ่งโปร่งใส และนำออกในวันรับขยะรีไซเคิลของเขต",
+        "en": "Put it in a clear or translucent bag on your area's recycling day.",
+        "ja": "透明・半透明の袋に入れ、地区の資源物の日に出す。"
+       },
+       {
+        "icon": "ℹ️",
+        "th": "ข้อยกเว้น: ขวดที่มีคราบล้างไม่ออก ทิ้งเป็นขยะเผาไม่ได้",
+        "en": "Exception: bottles with residue that will not wash off are non-burnable.",
+        "ja": "例外：洗っても汚れが落ちないびんは燃やせないごみ。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "pump_body": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ขวดแก้วจะหนักและแข็ง ถ้าเป็นแก้วให้ย้อนกลับไปเลือก \"แก้ว\" ขวดพลาสติกทั่วไปทิ้งเผาได้",
+        "en": "Glass bottles are heavy and rigid; if glass, go back and choose \"Glass\". Ordinary plastic bottles are burnable.",
+        "ja": "ガラスは重く硬い。ガラスなら戻って「ガラス」を選ぶ。一般的なプラスチック容器は燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🔩",
+        "th": "ถอดหัวปั๊มออก หัวปั๊มที่มีสปริงโลหะทิ้งเผาไม่ได้",
+        "en": "Remove the pump; a pump with a metal spring is non-burnable.",
+        "ja": "ポンプを外す。金属ばね入りのポンプは燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     }
+    ]
+   },
+   "icon": "🧼"
+  },
+  {
+   "id": "snack_wrapper",
+   "en": "Snack Wrapper",
+   "th": "ซองขนม",
+   "ja": "菓子の包装袋",
+   "material": "Plastic",
+   "category": "burnable",
+   "status": "conditional",
+   "details_th": "ซองขนม/ฟิล์มพลาสติกบางอ่อน ทิ้งเป็นขยะเผาได้ | ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+   "details_ja": "薄く軟らかいお菓子の包装・フィルムは燃やせるごみ。 | 市指定の燃やせるごみ袋に入れ、収集日に出す。",
+   "aliases": [
+    "wrapper",
+    "food wrapper",
+    "ซองพลาสติก",
+    "ซองขนม",
+    "Snack Wrapper",
+    "お菓子の包装",
+    "snack wrapper"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Thin flexible snack wrappers and plastic films are burnable. | Use a city-designated burnable-waste bag and the burnable collection day.",
+   "model_class": "Snack Wrapper",
+   "questions": [],
+   "disposal": {
+    "default": {
+     "category": "burnable",
+     "ready": true,
+     "steps": [
+      {
+       "icon": "🍬",
+       "th": "ซองขนม/ฟิล์มพลาสติกบางอ่อน ทิ้งเป็นขยะเผาได้",
+       "en": "Thin flexible snack wrappers and plastic films are burnable.",
+       "ja": "薄く軟らかいお菓子の包装・フィルムは燃やせるごみ。"
+      },
+      {
+       "icon": "🛍️",
+       "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+       "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+       "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+      }
+     ]
+    },
+    "cases": []
+   },
+   "icon": "🍬"
+  },
+  {
+   "id": "spray_can",
+   "en": "Spray Can",
+   "th": "กระป๋องสเปรย์",
+   "ja": "スプレー缶",
+   "material": "Metal",
+   "category": "hazardous",
+   "status": "conditional",
+   "details_th": "ใช้ของในกระป๋องให้หมดเท่าที่ปลอดภัย ห้ามเจาะกระป๋องเด็ดขาด | ถ้ามีของเหลือให้เขียนระบุว่ามีของเหลืออยู่ แยกฝาพลาสติกไปขยะเผาได้ | ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น และทิ้งวันรับขยะอันตราย",
+   "details_ja": "できるだけ使い切り、缶に穴を開けない。 | 中身が残る場合は明記する。プラのふたは燃やせるごみへ。 | 他のごみと分け、透明・半透明の袋に入れて危険ごみの収集日に出す。",
+   "aliases": [
+    "aerosol can",
+    "กระป๋องแก๊ส",
+    "สเปรย์",
+    "Spray Can",
+    "กระป๋องสเปรย์",
+    "スプレー缶",
+    "spray can",
+    "สเปรย์ฆ่าแมลง",
+    "สเปรย์ฉีดผม",
+    "สเปรย์จัดแต่งทรง",
+    "殺虫剤",
+    "整髪料",
+    "ヘアスプレー",
+    "insecticide spray",
+    "hair spray"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Use contents as safely as possible. Never puncture an aerosol can. | If contents remain, clearly label this; plastic cap goes to burnable waste. | Place in a separate clear/translucent bag on a hazardous-waste collection day.",
+   "model_class": "Spray Can",
+   "questions": [
+    {
+     "id": "spray_label",
+     "label_th": "บนกระป๋องมีข้อความ 「高圧ガスを使用している可燃性の製品」 ไหม?",
+     "label_en": "Does the can say 「高圧ガスを使用している可燃性の製品」 (flammable, high-pressure gas)?",
+     "label_ja": "「高圧ガスを使用している可燃性の製品」と書いてありますか？",
+     "options": [
+      {
+       "id": "yes",
+       "th": "มี",
+       "en": "Yes",
+       "ja": "ある"
+      },
+      {
+       "id": "no",
+       "th": "ไม่มี",
+       "en": "No",
+       "ja": "ない"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "cases": [
+     {
+      "when": {
+       "spray_label": "unsure"
+      },
+      "category": "hazardous",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "หาข้อความ 「高圧ガスを使用している可燃性の製品」 บนฉลาก",
+        "en": "Look for 「高圧ガスを使用している可燃性の製品」 on the label.",
+        "ja": "ラベルの「高圧ガスを使用している可燃性の製品」の表示を探す。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ให้แยกเป็นขยะอันตรายไว้ก่อน ปลอดภัยที่สุด",
+        "en": "If still unsure, treat it as hazardous waste. This is the safest choice.",
+        "ja": "わからない場合は、最も安全な危険ごみとして出す。"
+       },
+       {
+        "icon": "🚫",
+        "th": "ใช้ให้หมดก่อน และห้ามเจาะรูกระป๋อง",
+        "en": "Use it up first and never puncture the can.",
+        "ja": "中身を使い切り、穴は開けない。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น แล้วนำออกในวันเก็บขยะอันตราย",
+        "en": "Use a clear or translucent bag, kept apart from other waste, on the hazardous-waste day.",
+        "ja": "透明・半透明の袋に入れ、他のごみと分けて危険ごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "hazardous",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🚫",
+        "th": "ใช้ของในกระป๋องให้หมดเท่าที่ปลอดภัย ห้ามเจาะกระป๋องเด็ดขาด",
+        "en": "Use contents as safely as possible. Never puncture an aerosol can.",
+        "ja": "できるだけ使い切り、缶に穴を開けない。"
+       },
+       {
+        "icon": "🖊️",
+        "th": "ถ้ามีของเหลือให้เขียนระบุว่ามีของเหลืออยู่ แยกฝาพลาสติกไปขยะเผาได้",
+        "en": "If contents remain, clearly label this; plastic cap goes to burnable waste.",
+        "ja": "中身が残る場合は明記する。プラのふたは燃やせるごみへ。"
+       },
+       {
+        "icon": "⚠️",
+        "th": "ใส่ถุงใสหรือกึ่งโปร่งใส แยกจากขยะอื่น และทิ้งวันรับขยะอันตราย",
+        "en": "Place in a separate clear/translucent bag on a hazardous-waste collection day.",
+        "ja": "他のごみと分け、透明・半透明の袋に入れて危険ごみの収集日に出す。"
+       }
+      ],
+      "when": {
+       "spray_label": "yes"
+      }
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🧯",
+        "th": "สเปรย์ที่ไม่มีข้อความนี้เป็นขยะเผาไม่ได้ ต้องใช้ให้หมดก่อน เมืองไม่เก็บกระป๋องที่ยังมีของเหลือ",
+        "en": "Spray cans without this label are non-burnable and must be empty; the city does not collect them with contents left.",
+        "ja": "表示のないスプレー缶は燃やせないごみ。中身が残っているものは市で収集しないので空にする。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "spray_label": "no"
+      }
+     }
+    ],
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    }
+   },
+   "icon": "🧯"
+  },
+  {
+   "id": "plastic_squeeze_tube",
+   "en": "Squeeze Tube",
+   "th": "หลอดบีบ",
+   "ja": "チューブ容器",
+   "material": "Plastic",
+   "category": "burnable",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "squeeze tube",
+    "หลอดบีบ",
+    "Plastic Squeeze Tube",
+    "หลอดบีบพลาสติก",
+    "チューブ容器",
+    "plastic squeeze tube"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Squeeze Tube",
+   "questions": [
+    {
+     "id": "tube_type",
+     "label_th": "หลอดบีบทำจากอะไร?",
+     "label_en": "Tube material?",
+     "label_ja": "チューブの材質は？",
+     "options": [
+      {
+       "id": "soft",
+       "th": "พลาสติก",
+       "en": "Plastic",
+       "ja": "プラスチック"
+      },
+      {
+       "id": "metal",
+       "th": "โลหะ",
+       "en": "Metal",
+       "ja": "金属"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "tube_type": "unsure"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "บีบหลอดดู หลอดโลหะ (อะลูมิเนียม) บีบแล้วยุบค้าง หลอดพลาสติกบีบแล้วคืนรูป ถ้าเป็นพลาสติก ย้อนกลับไปเลือกใหม่ จะทิ้งเผาได้",
+        "en": "Squeeze it: metal (aluminium) tubes stay dented, plastic ones spring back. If plastic, go back and choose it: it is burnable.",
+        "ja": "押してみる。金属（アルミ）はへこんだまま、プラスチックは元に戻る。プラスチックなら戻って選ぶと燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาไม่ได้ ปลอดภัยกว่า",
+        "en": "If still unsure, non-burnable is the safer choice.",
+        "ja": "わからない場合は、より安全な燃やせないごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔥",
+        "th": "หลอดบีบพลาสติก (ยาสีฟัน ซอส ครีม) ทิ้งเผาได้ บีบของข้างในออกให้มากที่สุด",
+        "en": "Plastic tubes (toothpaste, sauce, cream) are burnable. Squeeze out as much as you can.",
+        "ja": "プラスチックのチューブ（歯みがき・調味料など）は燃やせるごみ。中身はできるだけ出す。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "tube_type": "soft"
+      }
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔩",
+        "th": "หลอดบีบโลหะหรือพลาสติกแข็งหนา ทิ้งเป็นขยะเผาไม่ได้",
+        "en": "Metal or thick rigid tubes are non-burnable waste.",
+        "ja": "金属製や硬い厚手のチューブは燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "tube_type": [
+        "hard",
+        "metal"
+       ]
+      }
+     }
+    ]
+   },
+   "icon": "🍯"
+  },
+  {
+   "id": "plastic_straw",
+   "en": "Straw",
+   "th": "หลอดดูด",
+   "ja": "ストロー",
+   "material": "Mixed",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "straw",
+    "หลอดดูด",
+    "Plastic Straw",
+    "หลอดดูดพลาสติก",
+    "プラスチックストロー",
+    "plastic straw",
+    "หลอด"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Straw",
+   "questions": [
+    {
+     "id": "straw_type",
+     "label_th": "หลอดดูดทำจากอะไร?",
+     "label_en": "Straw material?",
+     "label_ja": "ストローの材質は？",
+     "options": [
+      {
+       "id": "plastic",
+       "th": "พลาสติก",
+       "en": "Plastic",
+       "ja": "プラスチック"
+      },
+      {
+       "id": "paper",
+       "th": "กระดาษ",
+       "en": "Paper",
+       "ja": "紙"
+      },
+      {
+       "id": "metal",
+       "th": "โลหะ",
+       "en": "Metal",
+       "ja": "金属"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "straw_type": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "หลอดพลาสติกบางและหลอดกระดาษ ทิ้งเผาได้ทั้งคู่ ถ้าเป็นหลอดโลหะ (หนักและแข็ง) ให้ย้อนกลับไปเลือก \"โลหะ\"",
+        "en": "Thin plastic and paper straws are both burnable. If it is metal (heavy and hard), go back and choose \"Metal\".",
+        "ja": "薄いプラスチックや紙のストローは燃やせるごみ。金属製（重く硬い）なら戻って「金属」を選ぶ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🥤",
+        "th": "หลอดพลาสติกบางหรือหลอดกระดาษ ทิ้งเผาได้",
+        "en": "Thin plastic or paper straws are burnable.",
+        "ja": "薄いプラスチック・紙のストローは燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag and the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "straw_type": [
+        "plastic",
+        "paper"
+       ]
+      }
+     },
+     {
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🥤",
+        "th": "หลอดโลหะหรือหลอดพลาสติกแข็งหนาเป็นขยะเผาไม่ได้",
+        "en": "Metal or thick rigid plastic straws are non-burnable.",
+        "ja": "金属・硬く厚いプラのストローは燃やせないごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag and the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、収集日に出す。"
+       }
+      ],
+      "when": {
+       "straw_type": [
+        "metal",
+        "hard"
+       ]
+      }
+     }
+    ]
+   },
+   "icon": "🧋"
+  },
+  {
+   "id": "toothbrush",
+   "en": "Toothbrush",
+   "th": "แปรงสีฟัน",
+   "ja": "歯ブラシ",
+   "material": "Plastic",
+   "category": "review",
+   "status": "conditional",
+   "details_th": "ตอบคำถามเกี่ยวกับวัสดุ/สภาพก่อน แล้วระบบจะแสดงหมวดและขั้นตอนทิ้งตามกฎเมืองเอเบ็ตสึ",
+   "details_ja": "材質・状態について回答すると、江別市の分別区分と出し方を表示します。",
+   "aliases": [
+    "tooth brush",
+    "แปรง",
+    "Toothbrush",
+    "แปรงสีฟัน",
+    "歯ブラシ",
+    "toothbrush"
+   ],
+   "source": "https://www.city.ebetsu.hokkaido.jp/uploaded/attachment/71884.pdf",
+   "details_en": "Answer material/condition questions to obtain the correct Ebetsu waste category and disposal steps.",
+   "model_class": "Toothbrush",
+   "questions": [
+    {
+     "id": "brush_type",
+     "label_th": "แปรงสีฟันชนิดไหน?",
+     "label_en": "Which kind of toothbrush?",
+     "label_ja": "どの歯ブラシですか？",
+     "options": [
+      {
+       "id": "hard",
+       "th": "แปรงธรรมดา (พลาสติก ไม้ หรือไม้ไผ่)",
+       "en": "Ordinary (plastic, wood or bamboo)",
+       "ja": "普通の歯ブラシ（プラ・木・竹）"
+      },
+      {
+       "id": "electric",
+       "th": "แปรงไฟฟ้า (มีแบตเตอรี่)",
+       "en": "Electric (with battery)",
+       "ja": "電動歯ブラシ（電池入り）"
+      },
+      {
+       "id": "unsure",
+       "th": "ไม่แน่ใจ (บอกวิธีเช็กให้)",
+       "en": "Unsure (show how to check)",
+       "ja": "わからない（確認方法を表示）"
+      }
+     ]
+    }
+   ],
+   "disposal": {
+    "default": {
+     "category": "review",
+     "ready": false,
+     "steps": [
+      {
+       "icon": "🔎",
+       "th": "ยังยืนยันประเภทไม่ได้ กรุณาตรวจวัสดุและคู่มือเมืองก่อนทิ้ง ไม่เลือกหมวดจากรูปอย่างเดียว",
+       "en": "Not classified yet. Check the material and official city guide; the photo alone is not enough.",
+       "ja": "未確定です。材質と市の分別手引きを確認してください。"
+      }
+     ]
+    },
+    "cases": [
+     {
+      "when": {
+       "brush_type": "hard"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🪥",
+        "th": "แปรงสีฟันธรรมดา ทั้งพลาสติก ไม้ หรือไม้ไผ่ ทิ้งเป็นขยะเผาได้",
+        "en": "Ordinary toothbrushes (plastic, wood or bamboo) are burnable.",
+        "ja": "普通の歯ブラシ（プラ・木・竹）は燃やせるごみ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "brush_type": "electric"
+      },
+      "category": "nonburnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔋",
+        "th": "ถอดแบตเตอรี่ออก ปิดขั้วด้วยเทป แล้วทิ้งแบตเตอรี่เป็นขยะอันตราย",
+        "en": "Remove the battery, tape the terminals, and put the battery out as hazardous waste.",
+        "ja": "電池を外して端子をテープでふさぎ、危険ごみに出す。"
+       },
+       {
+        "icon": "🪥",
+        "th": "ตัวแปรงทิ้งเป็นขยะเผาไม่ได้ · ถ้าถอดแบตเตอรี่ไม่ได้ ให้ติดกระดาษ 「バッテリー付き」 บนถุง แล้วนำออกวันขยะเผาไม่ได้",
+        "en": "The body is non-burnable. If the battery cannot be removed, attach a note saying 「バッテリー付き」 to the bag and put it out on non-burnable day.",
+        "ja": "本体は燃やせないごみ。電池が外せない場合は袋に「バッテリー付き」と貼紙をして燃やせないごみの日に出す。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาไม่ได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาไม่ได้",
+        "en": "Use a city-designated non-burnable-waste bag on the non-burnable collection day.",
+        "ja": "市指定の燃やせないごみ袋に入れ、燃やせないごみの日に出す。"
+       }
+      ]
+     },
+     {
+      "when": {
+       "brush_type": "unsure"
+      },
+      "category": "burnable",
+      "ready": true,
+      "steps": [
+       {
+        "icon": "🔎",
+        "th": "ถ้ามีมอเตอร์หรือใส่ถ่าน ให้ย้อนกลับไปเลือก \"แปรงไฟฟ้า\" แปรงพลาสติกธรรมดาทิ้งเผาได้",
+        "en": "If it has a motor or battery, go back and choose \"Electric\". An ordinary plastic toothbrush is burnable.",
+        "ja": "モーターや電池があれば戻って「電動」を選ぶ。普通のプラスチック製は燃やせるごみ。"
+       },
+       {
+        "icon": "✅",
+        "th": "ถ้ายังไม่แน่ใจ ทิ้งเป็นขยะเผาได้",
+        "en": "If still unsure, put it in burnable waste.",
+        "ja": "わからない場合は燃やせるごみへ。"
+       },
+       {
+        "icon": "🛍️",
+        "th": "ใส่ถุงขยะเผาได้ที่เมืองกำหนด แล้วนำออกในวันเก็บขยะเผาได้",
+        "en": "Use a city-designated burnable-waste bag on the burnable collection day.",
+        "ja": "市指定の燃やせるごみ袋に入れ、燃やせるごみの日に出す。"
+       }
+      ]
+     }
+    ]
+   },
+   "icon": "🪥"
+  }
+ ],
+ "model_classes": [
+  "Battery",
+  "Beverage Can",
+  "Beverage Carton",
+  "Can Lid",
+  "Cardboard Box",
+  "Cutlery",
+  "Egg Carton",
+  "Foam Food Container",
+  "Food Can",
+  "Glass Beverage Bottle",
+  "Kraft Paper Envelope",
+  "Light Bulb",
+  "Lighter",
+  "Paper Cup",
+  "Paper Sheet",
+  "PET Bottle",
+  "PET Bottle Cap",
+  "Plastic Cup",
+  "Plastic Food Container",
+  "Pump Bottle",
+  "Snack Wrapper",
+  "Spray Can",
+  "Squeeze Tube",
+  "Straw",
+  "Toothbrush"
+ ],
+ "model_class_to_item_id": {
+  "Battery": "battery",
+  "Beverage Can": "aluminum_can",
+  "Beverage Carton": "beverage_carton",
+  "Can Lid": "can_lid",
+  "Cardboard Box": "cardboard_box",
+  "Cutlery": "plastic_cutlery",
+  "Egg Carton": "egg_carton",
+  "Foam Food Container": "foam_waste",
+  "Food Can": "food_can",
+  "Glass Beverage Bottle": "glass_bottle",
+  "Kraft Paper Envelope": "kraft_paper_envelope",
+  "Light Bulb": "light_bulb",
+  "Lighter": "lighter",
+  "Paper Cup": "paper_cup",
+  "Paper Sheet": "a4_paper",
+  "PET Bottle": "pet_plastic_bottle",
+  "PET Bottle Cap": "pet_bottle_cap",
+  "Plastic Cup": "plastic_cup",
+  "Plastic Food Container": "plastic_food_container",
+  "Pump Bottle": "pump_bottle",
+  "Snack Wrapper": "snack_wrapper",
+  "Spray Can": "spray_can",
+  "Squeeze Tube": "plastic_squeeze_tube",
+  "Straw": "plastic_straw",
+  "Toothbrush": "toothbrush"
+ },
+ "model_grouping": {
+  "cup": {
+   "label_th": "แก้วน้ำ (เลือกวัสดุ)",
+   "label_ja": "コップ（材質を確認）",
+   "label_en": "Cups (confirm material)",
+   "model_classes": [
+    "Paper Cup",
+    "Plastic Cup"
+   ]
+  },
+  "food_container": {
+   "label_th": "ภาชนะใส่อาหาร (เลือกวัสดุ)",
+   "label_ja": "食品容器・トレイ（材質を確認）",
+   "label_en": "Food containers (confirm material)",
+   "model_classes": [
+    "Foam Food Container",
+    "Plastic Food Container"
+   ]
+  }
+ }
+}
